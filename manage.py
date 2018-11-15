@@ -2,8 +2,10 @@ from simplewebtools import app
 # app.run(host='127.0.0.1', port=5000, debug=True)
 
 if __name__ == '__main__':
-    app.run()
-
+    # Testing Environment
+    app.run(debug=True)
+    # Production Environment
+    # app.run()
 
 
 """

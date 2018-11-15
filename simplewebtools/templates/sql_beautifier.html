@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="form-group">
+    <p>
+      <h1>SQL Beautifier</h1>
+    </p>
+    <hr>
+  </div>
+
+  {% for message in get_flashed_messages() %}
+  <div class="flash">{{ message }}</div>
+  {% endfor %}
+
+  <div class="form-group">
+      <form action="{{ url_for('beautify_sql') }}" method=post>
+        <dl>
+          <dt>Original SQL:
+          <dd><textarea class="form-control" name=original-sql rows=20 cols=50>{% if original_sql %}{{ original_sql }}{% endif %}</textarea>
+          <dd><input type=submit class="btn btn-primary mb-2" value="Beautify">
+        </dl>
+        <dl>
+          <dt>Beautified SQL:
+          <dd>
+            <textarea class="form-control" name=beautified-sql rows=20 cols=50>{% if beautified_sql %}{{ beautified_sql }}{% endif %}</textarea>
+        </dl>
+      </form>
+  </div>
+
+  <!-- <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+    <dl>
+      <dt>Title:
+      <dd><input type=text size=20 name=title>
+      <dt>Text:
+      <dd><textarea name=text rows=20 cols=50></textarea>
+      <dd><input type=submit value=Share>
+    </dl>
+  </form> -->
+
+  <!-- <ul class=entries>
+  {% for entry in entries %}
+    <li><h2>{{ entry.title }}</h2>{{ entry.text|safe }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul> -->
+
+{% endblock %}
