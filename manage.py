@@ -3,9 +3,9 @@ from simplewebtools import app
 
 if __name__ == '__main__':
     # Testing Environment
-    app.run(debug=True)
+    # app.run(debug=True)
     # Production Environment
-    # app.run()
+    app.run()
 
 
 """
