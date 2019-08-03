@@ -2,6 +2,8 @@ from flask import request, redirect, url_for, render_template, flash
 from simplewebtools import app, db
 from simplewebtools.models import Entry
 from simplewebtools.models import SqlResult
+from simplewebtools.sqlbeautify import SQLBeautifier
+from simplewebtools.textsorter import TextSorter
 
 @app.route('/')
 def show_home():
@@ -40,7 +42,16 @@ def show_sqlbeautifier():
 def beautify_sql():
 
     original_sql = request.form['original-sql']
-    beautified_sql = request.form['original-sql']
+
+    sqlb = SQLBeautifier()
+    sqlb.set_original_sql(original_sql)
+    sqlb.beautify()
+
+    beautified_sql = sqlb.get_beautified_sql()
+
+    flash('Your SQL was successfully beautified')
+
+    return render_template('sql_beautifier.html', original_sql=original_sql, beautified_sql=beautified_sql)
 
     # entry = Entry(
     #         title=request.form['title'],
@@ -57,11 +68,37 @@ def beautify_sql():
     # update_user = db.Column(db.Text)
     # update_date = db.Column(db.Date)
 
-    flash('Your SQL was successfully beautified')
-
     # return redirect(url_for('show_sqlbeautifier'), beautified_sql=beautified_sql)
     # return redirect(url_for('show_sqlbeautifier'), beautified_sql='aaa')
-
     # return redirect(url_for('show_sqlbeautifier'))
-    return render_template('sql_beautifier.html', original_sql=original_sql, beautified_sql=beautified_sql)
+
+
+
+@app.route('/text-sorter')
+def show_textsorter():
+    return render_template('textsorter.html')
+
+
+@app.route('/sort', methods=['POST'])
+def sort():
+    original_text = request.form['original-text']
+
+    texts = TextSorter()
+    texts.set_original_text(original_text)
+
+    result_text = texts.text_sort()
+
+    return render_template('textsorter.html', original_text=original_text, result_text=result_text)
+
+
+@app.route('/dupeliminator')
+def show_dupeliminator():
+    return render_template('dupeliminator.html')
+
+
+@app.route('/eliminate')
+def eliminate():
+    return render_template('dupeliminator.html')
+
+
 

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+  <div class="form-group">
+    <p>
+      <h1>Text Sorter</h1>
+    </p>
+    <hr>
+  </div>
+
+  {% for message in get_flashed_messages() %}
+  <div class="flash">{{ message }}</div>
+  {% endfor %}
+
+  <div class="form-group">
+      <form action="{{ url_for('sort') }}" method=post>
+        <dl>
+          <dt>Original Text:
+          <dd><textarea class="form-control" name=original-text rows=20 cols=50>{% if original_text %}{{ original_text }}{% endif %}</textarea>
+          <dd><input type=submit class="btn btn-primary mb-2" value="Sort">
+        </dl>
+        <dl>
+          <dt>Result Text:
+          <dd>
+            <textarea class="form-control" name=result-text rows=20 cols=50>{% if result_text %}{{ result_text }}{% endif %}</textarea>
+        </dl>
+      </form>
+  </div>
+
+{% endblock %}

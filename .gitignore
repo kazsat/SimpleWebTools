@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+simplewebtools/__pycache__/
+
+# Environments
+venv/
+
+# config files
+simplewebtools/config.py
+
+# VSCode
+.vscode/
+
+# PyCharm
+.idea/
